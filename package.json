@@ -1,0 +1,34 @@
+{
+  "name": "jsyg-animationqueue",
+  "version": "0.0.1",
+  "description": "Animation plugin (with queuing) for JSYG framework",
+  "main": "JSYG.AnimationQueue.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/YannickBochatay/JSYG.AnimationQueue.git"
+  },
+  "keywords": [
+    "svg",
+    "jquery",
+    "javascript",
+    "library"
+  ],
+  "author": "Yannick Bochatay",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/YannickBochatay/JSYG.AnimationQueue/issues"
+  },
+  "homepage": "https://github.com/YannickBochatay/JSYG.AnimationQueue#readme",
+  "devDependencies": {},
+  "dependencies": {
+    "jsyg": "",
+    "jsyg-animation": "",
+    "jsyg-stdconstruct": ""
+  }
+}

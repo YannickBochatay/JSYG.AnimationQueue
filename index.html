@@ -1,0 +1,95 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>JSYG tests</title>
+                
+        <script src="node_modules/jquery/dist/jquery.js"></script>
+        <script src="node_modules/jquery.easing/jquery.easing.js"></script>
+        <script src="node_modules/jsyg/dist/JSYG.js"></script>
+        <script src="node_modules/pathseg/pathseg.js"></script>
+        <script src="node_modules/jsyg-path/JSYG.Path.js"></script>
+        <script src="node_modules/jsyg-color/JSYG.Color.js"></script>
+        <script src="node_modules/jsyg-animation/JSYG.Animation.js"></script>
+        <script src="JSYG.AnimationQueue.js"></script>
+        <style>
+            
+        </style>
+    </head>
+    <body>
+                
+        <svg version="1.1" width="612px" height="502.174px" viewBox="0 0 800 800">
+          <path id="source" d="M 111.783 15.1084L 14.0771 111.564L 44.1489 140.823L 141.855 44.3677L 111.783 15.1084z" style="stroke:black; fill:none"/>
+          <path id="target" style="display:none" d="M 263.41570,235.14588 C 197.17570,235.14588 143.41575,288.90587 143.41575,355.14588 C 143.41575,489.90139 279.34890,525.23318 371.97820,658.45392 C 459.55244,526.05056 600.54070,485.59932 600.54070,355.14588 C 600.54070,288.90588 546.78080,235.14587 480.54070,235.14588 C 432.49280,235.14588 391.13910,263.51631 371.97820,304.33338 C 352.81740,263.51630 311.46370,235.14587 263.41570,235.14588 z "/>
+        </svg>
+        <br/>
+        <button id="play">play</button>
+        <button id="pause">pause</button>
+        <button id="stop">stop</button>
+        <button id="reverse">reverse</button>
+        
+        <script>
+          
+          var path = new JSYG.Path("#source");
+          
+          function initDraw() {
+            var length = path.getLength();
+            path.css("stroke-dashoffset",length);
+            path.css("stroke-dasharray",length);
+          }
+          
+          function finishDraw() {
+            path.css("stroke-dasharray",0);
+          }
+          
+          initDraw();
+          
+          var queue = new JSYG.AnimationQueue();
+          
+          queue.add({
+            node : path,
+            to : { "stroke-dashoffset":0 },
+            onstart : initDraw,
+            onend : finishDraw,
+            duration : 1000
+          });
+          
+          queue.add({
+            node : path,
+            to : { d: JSYG("#target").attr("d") },
+            duration : 1000
+          });
+          
+          queue.add({
+            node : path,
+            to : { rotate : 360 },
+            duration : 1000
+          });
+          
+          
+          
+          JSYG("#play").on("click",function() {
+            
+            queue.play();
+          });
+          
+          JSYG("#pause").on("click",function() {
+            
+            queue.pause();
+            
+          });
+          
+          JSYG("#stop").on("click",function() {
+            
+            queue.stop();
+            
+          });
+          
+          JSYG("#reverse").on("click",function() {
+            
+            queue.way("toggle");            
+          });
+         
+        </script>
+    </body>
+</html>
